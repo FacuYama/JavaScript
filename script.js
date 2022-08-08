@@ -1,32 +1,57 @@
-function verificador(n1 = 0) {
-    while (isNaN(n1)) {
-        n1 = parseFloat(prompt("Ingrese por favor una nota valida"))
-    }
-    nota = n1
+//FUNCIONES
+
+function verificador (pers) {
+    while(isNaN(pers.edad)){
+        pers.edad=parseInt(prompt("Ingrese una edad valida"))
+    }    
 }
+
+function ingresarPersona () {
+    const pers = {
+        nombre:"",
+        apellido:"",
+        localidad:"",
+        edad:""
+    }
+    pers.nombre = prompt("Ingrese su nombre:")
+    pers.apellido = prompt("ingrese su apellido")
+    pers.localidad = prompt("Ingrese su localidad")
+    pers.edad = parseInt(prompt("Ingrese su edad"))
+    verificador(pers)
+    personas.push(pers)
+}
+
+function calcularPromedio () {
+    for (let i = 0; i < personas.length; i++) {
+        total = total + personas[i].edad
+    }
+    promedio = total/personas.length
+}
+
+
+//VARIABLES
+
+const personas = []
+let edad = 0
+let total = 0
+let promedio = 0
 
 let condicion = "si"
-let nota = 0 
-let contador = 0
-let total = 0
 
-nota = parseFloat(prompt("Ingrese nota a promediar:"))
-while (condicion == "si") {
-    
-    verificador (nota)
-    total += nota
-    contador ++
+//MAIN
 
-    condicion = prompt("Escriba SI si quiere seguir agregando notas a promediar").toLowerCase()
+ingresarPersona()
+ 
 
+while (condicion =="si") {
+
+    condicion = prompt("Ingrese Si si quiere seguir agregando personas:").toLocaleLowerCase()
     if (condicion == "si"){
-        nota = parseFloat(prompt("Ingrese nota a promediar:"))
-
-    }else {
-        condicion = "no"
+        ingresarPersona()
     }
 }
 
-promedio = total / contador
+calcularPromedio()
+
 console.log(promedio)
-alert(promedio)
+console.log(personas)
