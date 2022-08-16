@@ -1,57 +1,49 @@
-//FUNCIONES
+const boton1 = document.querySelector("#boton1")
 
-function verificador (pers) {
-    while(isNaN(pers.edad)){
-        pers.edad=parseInt(prompt("Ingrese una edad valida"))
-    }    
-}
-
-function ingresarPersona () {
-    const pers = {
-        nombre:"",
-        apellido:"",
-        localidad:"",
-        edad:""
-    }
-    pers.nombre = prompt("Ingrese su nombre:")
-    pers.apellido = prompt("ingrese su apellido")
-    pers.localidad = prompt("Ingrese su localidad")
-    pers.edad = parseInt(prompt("Ingrese su edad"))
-    verificador(pers)
-    personas.push(pers)
-}
-
-function calcularPromedio () {
-    for (let i = 0; i < personas.length; i++) {
-        total = total + personas[i].edad
-    }
-    promedio = total/personas.length
-}
-
-
-//VARIABLES
-
-const personas = []
-let edad = 0
-let total = 0
-let promedio = 0
-
-let condicion = "si"
-
-//MAIN
-
-ingresarPersona()
- 
-
-while (condicion =="si") {
-
-    condicion = prompt("Ingrese Si si quiere seguir agregando personas:").toLocaleLowerCase()
-    if (condicion == "si"){
-        ingresarPersona()
+class User {
+    constructor(nombre, apellido, localidad, edad) {
+        this.nombre = nombre
+        this.apellido = apellido
+        this.localidad = localidad
+        this.edad = edad
     }
 }
 
-calcularPromedio()
+const idForm = document.getElementById("idForm")
+const botonUsers = document.getElementById("botonUsers")
+const divUsers = document.getElementById("divUsers")
 
-console.log(promedio)
-console.log(personas)
+const users = []
+
+idForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const nombre = document.getElementById("nombre").value
+    const apellido = document.getElementById("apellido").value
+    const localidad = document.getElementById("localidad").value
+    const edad = document.getElementById("edad").value
+
+    const user = new User(nombre, apellido, localidad, edad)
+
+    users.push(user)
+
+    idForm.reset()
+    console.log(users)
+})
+
+
+botonUsers.addEventListener('click', () => {
+    divUsers.innerHTML = ""
+    users.forEach((user, indice) => {
+        divUsers.innerHTML += `
+            <div class="card" id="user${indice}" style="width: 18rem;margin:3px;">
+                <div class="card-body">
+                    <h5 class="card-title">${user.nombre}</h5>
+                    <p class="card-text">${user.apellido}</p>
+                    <p class="card-text">${user.localidad}</p>
+                    <p class="card-text">${user.edad}</p>
+                </div>
+            </div>
+        
+        `
+    })
+})
