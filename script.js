@@ -31,6 +31,21 @@ idForm.addEventListener("submit", (e) => {
     if ((persona.nombre != "") && (persona.apellido != "") && (persona.edad != 0) && (persona.localidad != "")) { // if que chequea que los datos ingresados sean coherentes
         personas.push(persona)
         localStorage.setItem('personas', JSON.stringify(personas))
+        Toastify({
+            text: "Cargado correctamente",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    }else{
+
     }
     
     idForm.reset()
